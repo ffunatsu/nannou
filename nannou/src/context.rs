@@ -546,7 +546,7 @@ impl<'w, 's> App<'w, 's> {
     ///
     /// Multiple render textures may be created independently. The target camera is spawned
     /// lazily by [`RenderTexture::draw`] after the image asset has been registered.
-    pub fn render_to_texture(&self, width: u32, height: u32) -> RenderTexture {
+    pub fn new_render_texture(&self, width: u32, height: u32) -> RenderTexture {
         let mut image = Image::new_target_texture(
             width,
             height,

@@ -18,8 +18,8 @@ fn model(app: &App) -> Model {
     app.new_window().size(800, 500).primary().view(view).build();
 
     Model {
-        red_target: app.render_to_texture(256, 256),
-        blue_target: app.render_to_texture(256, 256),
+        red_target: app.new_render_texture(256, 256),
+        blue_target: app.new_render_texture(256, 256),
     }
 }
 
