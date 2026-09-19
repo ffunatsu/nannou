@@ -60,7 +60,7 @@ use std::path::{Path, PathBuf};
 use crate::app::{RunMode, UpdateModeExt, find_project_path};
 use crate::camera::{CameraComponents, SetCamera};
 use crate::light::{LightComponents, SetLight};
-use crate::prelude::render::NannouCamera;
+use crate::prelude::render::{NannouCamera, NannouRenderTextureCamera};
 #[cfg(feature = "egui")]
 use bevy_egui::EguiContext;
 
@@ -144,6 +144,7 @@ impl RenderTexture {
                     Transform::from_translation(Vec3::new(0.0, 0.0, 10.0)),
                     RenderTarget::Image(image.into()),
                     NannouCamera,
+                    NannouRenderTextureCamera,
                 ))
                 .id()
         });

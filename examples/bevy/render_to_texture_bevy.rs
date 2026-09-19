@@ -52,6 +52,7 @@ fn update(app: &nannou::App, model: &mut Model) {
             commands
                 .spawn((
                     render::NannouCamera,
+                    render::NannouRenderTextureCamera,
                     Camera {
                         clear_color: Color::BLACK.into(),
                         ..default()

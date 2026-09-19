@@ -1023,6 +1023,10 @@ pub mod blend {
 )]
 pub struct NannouCamera;
 
+/// Marks a camera created for a nannou render texture.
+#[derive(Component)]
+pub struct NannouRenderTextureCamera;
+
 impl NannouCamera {
     pub fn for_window(window: Entity) -> impl Bundle {
         (
