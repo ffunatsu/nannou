@@ -720,7 +720,11 @@ fn update_draw_mesh(
                 let image = images
                     .get(&image_target.handle)
                     .expect("render target image disappeared before drawing");
-                (image.width() as f32, image.height() as f32, image_target.scale_factor)
+                (
+                    image.width() as f32,
+                    image.height() as f32,
+                    image_target.scale_factor,
+                )
             }
             _ => {
                 let (window, _) = windows.get(draw.window).unwrap();
