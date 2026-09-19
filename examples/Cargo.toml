@@ -62,9 +62,6 @@ path = "bevy/simple.rs"
 name = "simple_shader"
 path = "bevy/simple_shader.rs"
 [[example]]
-name = "render_to_texture_bevy"
-path = "bevy/render_to_texture_bevy.rs"
-[[example]]
 name = "windows"
 path = "bevy/windows.rs"
 [[example]]
