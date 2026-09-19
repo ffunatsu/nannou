@@ -109,6 +109,49 @@ pub struct App<'w, 's> {
     pending_windows: Local<'s, RefCell<Vec<PendingWindow>>>,
 }
 
+/// A texture rendered by a nannou [`Draw`] pass.
+pub struct RenderTexture {
+    image: Handle<Image>,
+    camera: Option<Entity>,
+}
+
+impl RenderTexture {
+    /// The image handle used when displaying this render texture.
+    pub fn image(&self) -> &Handle<Image> {
+        &self.image
+    }
+
+    /// Get the drawing context for this target once its image has been registered.
+    ///
+    /// The first call may return `None` while Bevy finishes registering the image.
+    pub fn draw(&mut self, app: &App) -> Option<Draw> {
+        if let Some(camera) = self.camera {
+            return Some(app.draw_for_window(camera));
+        }
+        if app.images.get(&self.image).is_none() {
+            return None;
+        }
+
+        let image = self.image.clone();
+        let camera = app.par_commands.command_scope(move |mut commands| {
+            commands
+                .spawn((
+                    Camera {
+                        clear_color: ClearColorConfig::None,
+                        ..default()
+                    },
+                    Projection::Orthographic(OrthographicProjection::default_2d()),
+                    Transform::from_translation(Vec3::new(0.0, 0.0, 10.0)),
+                    RenderTarget::Image(image.into()),
+                    NannouCamera,
+                ))
+                .id()
+        });
+        self.camera = Some(camera);
+        None
+    }
+}
+
 /// A window created this call but not yet spawned: `(entity, primary, component)`.
 type PendingWindow = (Entity, bool, bevy::window::Window);
 
@@ -496,6 +539,26 @@ impl<'w, 's> App<'w, 's> {
                 projection: OrthographicProjection::default_3d().into(),
                 ..default()
             },
+        }
+    }
+
+    /// Create an offscreen target that can be drawn to with the nannou [`Draw`] API.
+    ///
+    /// Multiple render textures may be created independently. The target camera is spawned
+    /// lazily by [`RenderTexture::draw`] after the image asset has been registered.
+    pub fn render_to_texture(&self, width: u32, height: u32) -> RenderTexture {
+        let mut image = Image::new_target_texture(
+            width,
+            height,
+            bevy::render::render_resource::TextureFormat::Rgba8Unorm,
+            Some(bevy::render::render_resource::TextureFormat::Rgba8UnormSrgb),
+        );
+        image.asset_usage = bevy::asset::RenderAssetUsages::MAIN_WORLD
+            | bevy::asset::RenderAssetUsages::RENDER_WORLD;
+
+        RenderTexture {
+            image: self.asset_server.add(image),
+            camera: None,
         }
     }
 

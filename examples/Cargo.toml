@@ -62,8 +62,8 @@ path = "bevy/simple.rs"
 name = "simple_shader"
 path = "bevy/simple_shader.rs"
 [[example]]
-name = "render_to_texture"
-path = "bevy/render_to_texture.rs"
+name = "render_to_texture_bevy"
+path = "bevy/render_to_texture_bevy.rs"
 [[example]]
 name = "windows"
 path = "bevy/windows.rs"
@@ -103,6 +103,9 @@ path = "draw/draw_blend.rs"
 [[example]]
 name = "draw_capture"
 path = "draw/draw_capture.rs"
+[[example]]
+name = "render_to_texture"
+path = "draw/render_to_texture.rs"
 [[example]]
 name = "draw_custom_shader_model"
 path = "draw/draw_custom_shader_model.rs"
