@@ -67,6 +67,7 @@ default = [
 egui = ["dep:bevy_egui", "bevy_egui/immutable_ctx"]
 # TODO: re-enable once `bevy-inspector-egui` supports Bevy 0.19.
 #inspector = ["egui", "dep:bevy-inspector-egui"]
+dynamic_linking = ["bevy/dynamic_linking"]
 hot_reload = ["bevy/file_watcher", "bevy/multi_threaded"]
 nightly = ["nannou_draw/nightly"]
 # Bundle Noto Sans as the default font, for deterministic rendering across
