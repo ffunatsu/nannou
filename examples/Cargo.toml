@@ -62,6 +62,12 @@ path = "bevy/simple.rs"
 name = "simple_shader"
 path = "bevy/simple_shader.rs"
 [[example]]
+name = "render_to_texture_cube"
+path = "bevy/render_to_texture_cube.rs"
+[[example]]
+name = "standard_material_cube"
+path = "bevy/standard_material_cube.rs"
+[[example]]
 name = "windows"
 path = "bevy/windows.rs"
 [[example]]
@@ -113,6 +119,9 @@ path = "draw/draw_loop.rs"
 [[example]]
 name = "draw_mesh"
 path = "draw/draw_mesh.rs"
+[[example]]
+name = "draw_mesh_camera_light"
+path = "draw/draw_mesh_camera_light.rs"
 [[example]]
 name = "draw_polygon"
 path = "draw/draw_polygon.rs"
